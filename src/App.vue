@@ -22,6 +22,9 @@
           <div class="submit" @click="submit">
             <button >生成</button>
           </div>
+          <div style="text-align: center; margin-top: 50px;">
+            <img style=" height: 100px;" src="./assets/zanshangma.png">
+          </div>
         </div>
       </form>
       <div v-show="isshow" id="stage" v-if="dog">
