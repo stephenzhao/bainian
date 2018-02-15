@@ -28,6 +28,10 @@
         </div>
       </form>
       <div v-show="isshow" id="stage" v-if="dog">
+
+        <div class="logo_rccode">
+          <img src="./assets/orc.jpg">
+        </div>
         <div class="content">
           <span>恭祝：</span>
           <h1>天狗守吉祥 天狗保平安</h1>
@@ -37,9 +41,6 @@
               我是<strong>{{dogNamesCn[dog]}}</strong>
             </div>
           </div>
-        </div>
-        <div class="logo_rccode">
-          <img src="./assets/orc.jpg">
         </div>
       </div>
       <div v-show="!isshow" style="text-align: center; margin-bottom: 20px;"> 长按狗狗保存图片 分享祝福</div>
@@ -177,10 +178,11 @@ body{
   color: slategrey;
 }
 .logo_rccode{
-  height: 28px;
-  width: 28px;
+  height: 80px;
+  width: 80px;
   position: absolute;
   bottom: 0px;
+  z-index: 0;
   right:0px;
 }
 .logo_rccode img {
