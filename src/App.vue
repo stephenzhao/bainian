@@ -43,13 +43,17 @@
           </div>
         </div>
       </div>
-      <div v-show="!isshow" style="text-align: center; margin-bottom: 20px;"> 长按狗狗保存图片 分享祝福</div>
+      <div v-show="!isshow" style="text-align: center; margin-bottom: 20px;">
+        <div id="dogImg"></div>
+        长按狗狗保存图片 分享祝福
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import html2canvas from 'html2canvas'
+import Canvas2Image from './canvas2img'
 export default {
   name: 'app',
   data() {
@@ -67,6 +71,7 @@ export default {
       isshow: true,
       name: '',
       gender: '',
+      dogImg: '',
       dog: null,
       dogNames: [
         'beagle',
@@ -129,7 +134,9 @@ export default {
       this.dog = this.dogNames[code];
       setTimeout(() => {
         html2canvas(document.querySelector("#stage")).then(canvas => {
-            document.body.appendChild(canvas)
+          var img = Canvas2Image.convertToJPEG(canvas, 400, 400);
+          this.dogImg = img;
+          document.querySelector('#dogImg').appendChild(img);
           this.isshow = false;
         });
       }, 300);
@@ -209,6 +216,9 @@ body{
 }
 .submit{
   padding-top:.5rem;
+}
+#dogImg img{
+  width: 80%;
 }
 button{
     font-size: 14px;
