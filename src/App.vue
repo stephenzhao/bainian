@@ -30,22 +30,22 @@
       <div v-show="isshow" id="stage" v-if="dog">
 
         <div class="logo_rccode">
-          <img src="./assets/orc.jpg">
+          <img src="./assets/orc.png">
         </div>
         <div class="content">
-          <span>恭祝：</span>
+          <span style="color: slategrey;">{{name}} 携守护犬 {{dogNamesCn[dog]}} 恭祝大家：</span>
           <h1>天狗守吉祥 天狗保平安</h1>
           <div >
-            <img height="80" width="80" :src="dogs[dog]" class="main-img">
+            <img height="150" width="150" :src="dogs[dog]" class="main-img">
             <div class="dog-tips">
-              我是<strong>{{dogNamesCn[dog]}}</strong>
+              <strong>{{dogNamesCn[dog]}}</strong>
             </div>
           </div>
         </div>
       </div>
       <div v-show="!isshow" style="text-align: center; margin-bottom: 20px;">
-        <div id="dogImg"></div>
-        长按狗狗保存图片 分享祝福
+        <div id="dogImg"><img :src="dogImg"></div>
+        <p>长按狗狗保存图片 分享祝福</p>
       </div>
     </div>
   </div>
@@ -53,7 +53,6 @@
 
 <script>
 import html2canvas from 'html2canvas'
-import Canvas2Image from './canvas2img'
 export default {
   name: 'app',
   data() {
@@ -75,16 +74,16 @@ export default {
       dog: null,
       dogNames: [
         'beagle',
-        'tuffpugg',
         'bassed',
+        'tuffpugg',
         'boldercollie',
-        'bullterrier',
         'cocker',
+        'bullterrier',
         'doberman',
         'husky',
+        'gussy',
         'pitbull',
         'shepherd',
-        'gussy',
         'chihuahua'
       ],
       dogNamesCn: {
@@ -124,6 +123,11 @@ export default {
       var resultCode = (name.charCodeAt(0) * name.length * gender) % 12;
       return resultCode;
     },
+    copyImg(e) {
+      e.preventDefault();
+      const img = document.querySelector("#screenshotCanvas").toDataURL('image/png');
+      console.log(img);
+    },
     submit(e) {
       e.preventDefault()
       if (!this.name || !this.gender) {
@@ -134,9 +138,7 @@ export default {
       this.dog = this.dogNames[code];
       setTimeout(() => {
         html2canvas(document.querySelector("#stage")).then(canvas => {
-          var img = Canvas2Image.convertToJPEG(canvas, 400, 400);
-          this.dogImg = img;
-          document.querySelector('#dogImg').appendChild(img);
+          this.dogImg = canvas.toDataURL('image/png');
           this.isshow = false;
         });
       }, 300);
@@ -183,7 +185,7 @@ body{
   right: 0;
 }
 .main-img{
-  margin: .3rem;
+  margin: .1rem;
 }
 .content h1{
   /*padding: 20px;*/
@@ -196,8 +198,8 @@ body{
   color: slategrey;
 }
 .logo_rccode{
-  height: 80px;
-  width: 80px;
+  height: 28px;
+  width: 28px;
   position: absolute;
   bottom: 0px;
   z-index: 0;
