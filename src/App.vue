@@ -5,7 +5,7 @@
         <div class="form-item">
           <h1>领取专属守护犬</h1>
           <div class="form-filed">
-            <label>姓名: <input type="text" name="name" v-model="name"></label>
+            <label>姓名: <input class="input" type="text" name="name" v-model="name"></label>
           </div>
           <div class="form-filed">
             性别:
@@ -144,6 +144,17 @@ html{
 }
 body{
   font-size: 16px;
+  user-select: none;
+}
+.input{
+  border:none;
+  outline: none;
+  appearance: none;
+  border-radius: 0;
+  border: 0;
+  flex: 1;
+  outline: 0;
+  font-size: inherit;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
